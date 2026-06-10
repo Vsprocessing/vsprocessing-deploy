@@ -1,0 +1,29 @@
+{
+  "installCommand": "npm install",
+  "buildCommand": "npm run vercel-build",
+  "rewrites": [
+    {
+      "source": "/static/build/out/vs/workbench/workbench.web.main.css",
+      "destination": "/static/build/out/vs/workbench/workbench.web.main.internal.css"
+    },
+    {
+      "source": "/callback",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/",
+      "destination": "/api/index"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/static/build/(.*)",
+      "headers": [
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "cross-origin"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "vsprocessing-deploy",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "vercel-build": "node scripts/prepare-static-build.mjs"
+  },
+  "dependencies": {
+    "vscode-oniguruma": "1.7.0",
+    "vscode-textmate": "^9.3.2"
+  }
+}
