@@ -7,6 +7,10 @@
       "destination": "/static/build/out/vs/workbench/workbench.web.main.internal.css"
     },
     {
+      "source": "/auth",
+      "destination": "/static/build/auth.html"
+    },
+    {
       "source": "/callback",
       "destination": "/api/index"
     },

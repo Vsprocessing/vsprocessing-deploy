@@ -5,7 +5,7 @@ import path from 'node:path';
 const root = process.cwd();
 const staticBuild = path.join(root, 'public/static/build');
 const workbenchBundle = path.join(staticBuild, 'out/vs/workbench/workbench.web.main.internal.js');
-const localVscodeRepo = process.env.VSCODE_REPO ?? '/home/cloudtron/vscode';
+const localVscodeRepo = process.env.VSPROCESSING_REPO ?? path.join(root, '../vsprocessing');
 
 const originalWebviewOriginCheck = `if (hostname === parentOriginHash || hostname.startsWith(parentOriginHash + '.')) {`;
 const sameOriginWebviewOriginCheck = `if (hostname === parentOriginHash || hostname.startsWith(parentOriginHash + '.') || location.origin === parentOrigin) {`;

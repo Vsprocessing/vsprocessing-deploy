@@ -261,11 +261,18 @@ function callbackHtml() {
 			const query = new URL(location.href).searchParams;
 			const requestId = query.get('vscode-reqid');
 			if (requestId) {
+				// Merge params appended by redirects (e.g. OAuth code/state) into the callback URI query.
+				const params = new URLSearchParams(query.get('vscode-query') || '');
+				query.forEach((value, key) => {
+					if (!key.startsWith('vscode-')) {
+						params.set(key, value);
+					}
+				});
 				localStorage.setItem('vscode-web.url-callbacks[' + requestId + ']', JSON.stringify({
 					scheme: query.get('vscode-scheme'),
 					authority: query.get('vscode-authority'),
 					path: query.get('vscode-path'),
-					query: query.get('vscode-query'),
+					query: params.toString() || null,
 					fragment: query.get('vscode-fragment')
 				}));
 			}

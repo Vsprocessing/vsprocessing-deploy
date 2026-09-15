@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "vercel-build": "node scripts/prepare-static-build.mjs"
+    "vercel-build": "node scripts/prepare-static-build.mjs",
+    "build-vscode": "node scripts/build-vscode.mjs"
   },
   "dependencies": {
     "vscode-oniguruma": "1.7.0",
