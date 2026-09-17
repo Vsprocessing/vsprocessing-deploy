@@ -102,14 +102,29 @@ class WorkspaceProvider {
 				workspace = { workspaceUri: URI.revive(config.workspaceUri) };
 			}
 		}
-		return new WorkspaceProvider(workspace, payload);
+		// Open a folder inside the temporary workspace rather than as the workspace itself, so
+		// that switching to another folder later does not need a page load.
+		let initialFolders;
+		if (workspace && 'folderUri' in workspace && config.workspaceUri) {
+			initialFolders = [workspace.folderUri];
+			workspace = { workspaceUri: URI.revive(config.workspaceUri) };
+		}
+		return new WorkspaceProvider(workspace, payload, initialFolders);
 	}
 
 	trusted = true;
 
-	constructor(workspace, payload) {
+	constructor(workspace, payload, initialFolders) {
 		this.workspace = workspace;
 		this.payload = payload;
+		this.initialFolders = initialFolders;
+	}
+
+	updateAddressBar(workspace) {
+		const targetHref = this.createTargetUrl(workspace);
+		if (targetHref) {
+			window.history.replaceState(null, '', targetHref);
+		}
 	}
 
 	async open(workspace, options) {
